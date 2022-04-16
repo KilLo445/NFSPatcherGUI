@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ookii.Dialogs.Wpf;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -77,7 +78,26 @@ namespace NFSPatcherGUI
                     {
                         MessageBox.Show($"{ex}");
                     }
+                    using (TaskDialog dialogDLUpdate = new TaskDialog())
+                    {
+                        SystemSounds.Exclamation.Play();
+                        dialogDLUpdate.WindowTitle = "Need for Speed: ProStreet";
+                        dialogDLUpdate.MainInstruction = "Would you like to download update 1.1?";
+                        dialogDLUpdate.Content = "This update is optional and for retail copies of the game, the game should still run fine without this patch.";
+                        TaskDialogButton yesButton = new TaskDialogButton("Yes");
+                        TaskDialogButton noButton = new TaskDialogButton("No");
+                        dialogDLUpdate.Buttons.Add(yesButton);
+                        dialogDLUpdate.Buttons.Add(noButton);
+                        TaskDialogButton button = dialogDLUpdate.ShowDialog(this);
+                        if (button == yesButton)
+                        {
+                            Process.Start("https://github.com/KilLo445/NFSPatcher/blob/main/patcher/prostreet/DLCPatch-v1.1.md");
+                        }
+                        else if (button == noButton)
+                        {
 
+                        }
+                    }
                     SystemSounds.Exclamation.Play();
                     MessageBox.Show("Patch complete!", "Need for Speed: ProStreet");
                     Directory.Delete(tempFolder, true);
