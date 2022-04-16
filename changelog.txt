@@ -1,0 +1,10 @@
+NFSPatcherGUI Changelog
+
+v1.2  
+Added v1.1 to ProStreet patch.  
+  
+v1.1
+Added checks to verify game location.
+
+v1.0
+All games added
